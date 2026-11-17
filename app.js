@@ -12,14 +12,43 @@ const ROLES = [
 ];
 
 const members = [
-  { name: "Trompette2021PrésidentChefMu", promotion: 2021, pupitre: "Trompette", roles: ["Président", "Chef Mu"] },
-  { name: "Trombone2022RoiDesBlairoBlairo", promotion: 2022, pupitre: "Trombone", roles: ["Roi des Blairo", "Blairo"] },
-  { name: "Saxophone2020RespoComRespoBière", promotion: 2020, pupitre: "Saxophone", roles: ["Respo Com", "Respo Bière"] },
-  { name: "Gros2024Trésorier", promotion: 2024, pupitre: "Gros", roles: ["Trésorier"] },
-  { name: "Basse2019RespoPrevRespoCom", promotion: 2019, pupitre: "Basse", roles: ["Respo prev", "Respo Com"] },
-  { name: "Saxophone2024ChefMuBlairo", promotion: 2024, pupitre: "Saxophone", roles: ["Chef Mu", "Blairo"] },
-  { name: "Trompette2023Blairo", promotion: 2023, pupitre: "Trompette", roles: ["Blairo"] },
-  { name: "Basse2022RespoBièrePrésident", promotion: 2022, pupitre: "Basse", roles: ["Respo Bière", "Président"] }
+  { name: "Gros2019Président", promotion: 2019, pupitre: "Gros", roles: ["Président"] },
+  { name: "Gros2019ChefMu", promotion: 2019, pupitre: "Gros", roles: ["Chef Mu"] },
+  { name: "Gros2019RoiDesBlairo", promotion: 2019, pupitre: "Gros", roles: ["Roi des Blairo"] },
+  { name: "Trombone2019RespoCom", promotion: 2019, pupitre: "Trombone", roles: ["Respo Com"] },
+  { name: "Saxophone2019Trésorier", promotion: 2019, pupitre: "Saxophone", roles: ["Trésorier"] },
+  { name: "Basse2019RespoPrev", promotion: 2019, pupitre: "Basse", roles: ["Respo prev"] },
+  { name: "Trompette2019RespoBière", promotion: 2019, pupitre: "Trompette", roles: ["Respo Bière"] },
+  { name: "Gros2019Blairo", promotion: 2019, pupitre: "Gros", roles: ["Blairo"] },
+  { name: "Trombone2019Blairo", promotion: 2019, pupitre: "Trombone", roles: ["Blairo"] },
+
+  { name: "Gros2020Président", promotion: 2020, pupitre: "Gros", roles: ["Président"] },
+  { name: "Gros2020ChefMu", promotion: 2020, pupitre: "Gros", roles: ["Chef Mu"] },
+  { name: "Gros2020RoiDesBlairo", promotion: 2020, pupitre: "Gros", roles: ["Roi des Blairo"] },
+  { name: "Trombone2020RespoCom", promotion: 2020, pupitre: "Trombone", roles: ["Respo Com"] },
+  { name: "Saxophone2020Trésorier", promotion: 2020, pupitre: "Saxophone", roles: ["Trésorier"] },
+  { name: "Basse2020RespoPrev", promotion: 2020, pupitre: "Basse", roles: ["Respo prev"] },
+  { name: "Trompette2020RespoBière", promotion: 2020, pupitre: "Trompette", roles: ["Respo Bière"] },
+  { name: "Saxophone2020Blairo", promotion: 2020, pupitre: "Saxophone", roles: ["Blairo"] },
+
+  { name: "Gros2021Président", promotion: 2021, pupitre: "Gros", roles: ["Président"] },
+  { name: "Gros2021ChefMu", promotion: 2021, pupitre: "Gros", roles: ["Chef Mu"] },
+  { name: "Gros2021RoiDesBlairo", promotion: 2021, pupitre: "Gros", roles: ["Roi des Blairo"] },
+  { name: "Trombone2021RespoCom", promotion: 2021, pupitre: "Trombone", roles: ["Respo Com"] },
+  { name: "Saxophone2021Trésorier", promotion: 2021, pupitre: "Saxophone", roles: ["Trésorier"] },
+  { name: "Basse2021RespoPrev", promotion: 2021, pupitre: "Basse", roles: ["Respo prev"] },
+  { name: "Trompette2021RespoBière", promotion: 2021, pupitre: "Trompette", roles: ["Respo Bière"] },
+  { name: "Basse2021Blairo", promotion: 2021, pupitre: "Basse", roles: ["Blairo"] },
+  { name: "Trompette2021Blairo", promotion: 2021, pupitre: "Trompette", roles: ["Blairo"] },
+
+  { name: "Gros2022Président", promotion: 2022, pupitre: "Gros", roles: ["Président"] },
+  { name: "Gros2022ChefMu", promotion: 2022, pupitre: "Gros", roles: ["Chef Mu"] },
+  { name: "Gros2022RoiDesBlairo", promotion: 2022, pupitre: "Gros", roles: ["Roi des Blairo"] },
+  { name: "Trombone2022RespoCom", promotion: 2022, pupitre: "Trombone", roles: ["Respo Com"] },
+  { name: "Saxophone2022Trésorier", promotion: 2022, pupitre: "Saxophone", roles: ["Trésorier"] },
+  { name: "Basse2022RespoPrev", promotion: 2022, pupitre: "Basse", roles: ["Respo prev"] },
+  { name: "Trompette2022RespoBière", promotion: 2022, pupitre: "Trompette", roles: ["Respo Bière"] },
+  { name: "Gros2022Blairo", promotion: 2022, pupitre: "Gros", roles: ["Blairo"] }
 ];
 
 const nameInput = document.querySelector("#name-input");
