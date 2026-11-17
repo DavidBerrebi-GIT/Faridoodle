@@ -97,9 +97,8 @@ h1 {
   padding: 12px;
 }
 
-.advanced summary {
-  cursor: pointer;
-  font-weight: 750;
+.advanced h3 {
+  margin: 0 0 12px;
 }
 
 .advanced-grid {
