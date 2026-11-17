@@ -52,7 +52,6 @@ const members = [
 ];
 
 const nameInput = document.querySelector("#name-input");
-const suggestions = document.querySelector("#suggestions");
 const guessButton = document.querySelector("#guess-button");
 const historyBody = document.querySelector("#history-body");
 const errorMessage = document.querySelector("#error-message");
@@ -74,9 +73,10 @@ const promotionFilter = document.querySelector("#promotion-filter");
 const pupitreFilter = document.querySelector("#pupitre-filter");
 const roleFilter = document.querySelector("#role-filter");
 const selectedMemberDetails = document.querySelector("#selected-member-details");
+const filteredMemberList = document.querySelector("#filtered-member-list");
+const filteredMemberCount = document.querySelector("#filtered-member-count");
 
 let target = null;
-let selectedSuggestion = -1;
 let gameSolved = false;
 let candidateMembers = [...members];
 let attemptsUsed = 0;
@@ -118,41 +118,40 @@ function findMember(name) {
   return getCrossedMembers().find((member) => normalized(member.name) === normalized(name));
 }
 
-function updateSuggestions() {
+function updateFilteredMemberList() {
   const query = normalized(nameInput.value);
-  const filteredMembers = getCrossedMembers();
-  const matches = document.activeElement === nameInput
-    ? filteredMembers.filter((member) =>
-        !query || normalized(member.name).includes(query)
-      )
-    : [];
+  const matches = getCrossedMembers()
+    .filter((member) => !query || normalized(member.name).includes(query))
+    .sort((first, second) => first.name.localeCompare(second.name, "fr"));
 
-  suggestions.replaceChildren();
-  selectedSuggestion = -1;
-  nameInput.setAttribute("aria-expanded", matches.length ? "true" : "false");
+  filteredMemberList.replaceChildren();
+  filteredMemberCount.textContent = `${matches.length} résultat${matches.length > 1 ? "s" : ""}`;
 
-  matches.slice(0, 6).forEach((member, index) => {
+  matches.forEach((member) => {
     const item = document.createElement("li");
-    item.id = `suggestion-${index}`;
-    item.role = "option";
-    item.dataset.memberName = member.name;
+    item.tabIndex = 0;
     item.textContent = member.name;
 
-    item.addEventListener("mousedown", (event) => {
-      event.preventDefault();
-      chooseSuggestion(member.name);
-    });
-    suggestions.append(item);
-  });
+    if (normalized(nameInput.value) === normalized(member.name)) {
+      item.classList.add("selected");
+    }
 
-  suggestions.hidden = matches.length === 0;
+    item.addEventListener("click", () => chooseSuggestion(member.name));
+    item.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        chooseSuggestion(member.name);
+      }
+    });
+
+    filteredMemberList.append(item);
+  });
 }
 
 function chooseSuggestion(name) {
   nameInput.value = name;
-  suggestions.hidden = true;
-  nameInput.setAttribute("aria-expanded", "false");
   showSelectedMemberDetails(name);
+  updateFilteredMemberList();
   nameInput.focus();
 }
 
@@ -337,7 +336,7 @@ function submitGuess() {
   const guessedMember = findMember(nameInput.value);
 
   if (!guessedMember) {
-    errorMessage.textContent = "Choisissez un nom de membre exact dans les suggestions.";
+    errorMessage.textContent = "Choisissez un nom exact dans la liste des membres.";
     return;
   }
 
@@ -378,51 +377,22 @@ function submitGuess() {
   }
 
   nameInput.value = "";
-  suggestions.hidden = true;
-  nameInput.setAttribute("aria-expanded", "false");
   selectedMemberDetails.hidden = true;
   selectedMemberDetails.replaceChildren();
+  updateFilteredMemberList();
   nameInput.focus();
 }
 
 nameInput.addEventListener("input", () => {
   selectedMemberDetails.hidden = true;
   selectedMemberDetails.replaceChildren();
-  updateSuggestions();
+  updateFilteredMemberList();
 });
 
 nameInput.addEventListener("keydown", (event) => {
-  const items = [...suggestions.querySelectorAll("li")];
-
-  if (event.key === "ArrowDown" && items.length) {
+  if (event.key === "Enter") {
     event.preventDefault();
-    selectedSuggestion = (selectedSuggestion + 1) % items.length;
-  } else if (event.key === "ArrowUp" && items.length) {
-    event.preventDefault();
-    selectedSuggestion = (selectedSuggestion - 1 + items.length) % items.length;
-  } else if (event.key === "Enter") {
-    event.preventDefault();
-    if (selectedSuggestion >= 0) {
-      chooseSuggestion(items[selectedSuggestion].dataset.memberName);
-    }
     submitGuess();
-    return;
-  } else if (event.key === "Escape") {
-    suggestions.hidden = true;
-    nameInput.setAttribute("aria-expanded", "false");
-    return;
-  } else {
-    return;
-  }
-
-  items.forEach((item, index) => {
-    item.setAttribute("aria-selected", String(index === selectedSuggestion));
-  });
-
-  if (selectedSuggestion >= 0) {
-    nameInput.setAttribute("aria-activedescendant", items[selectedSuggestion].id);
-  } else {
-    nameInput.removeAttribute("aria-activedescendant");
   }
 });
 
@@ -458,7 +428,7 @@ function getCrossedMembers() {
 
 function updateCrossedFilter() {
   nameInput.focus();
-  updateSuggestions();
+  updateFilteredMemberList();
 }
 
 promotionFilter.addEventListener("change", updateCrossedFilter);

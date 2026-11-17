@@ -186,6 +186,50 @@ select {
   font-weight: 700;
 }
 
+.filtered-members-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.filtered-members-header span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.filtered-member-list {
+  max-height: 260px;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #f8f9fc;
+  list-style: none;
+}
+
+.filtered-member-list li {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.filtered-member-list li:last-child {
+  border-bottom: 0;
+}
+
+.filtered-member-list li:hover,
+.filtered-member-list li:focus,
+.filtered-member-list li.selected {
+  background: #eef1ff;
+  color: var(--accent);
+  outline: none;
+}
+
 .guess-panel {
   position: relative;
   display: grid;

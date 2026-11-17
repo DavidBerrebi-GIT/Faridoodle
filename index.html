@@ -101,23 +101,21 @@
               </select>
             </label>
           </div>
+          <div class="filtered-members-header">
+            <strong>Membres correspondants</strong>
+            <span id="filtered-member-count"></span>
+          </div>
+          <ul id="filtered-member-list" class="filtered-member-list" aria-live="polite"></ul>
         </section>
 
         <section class="guess-panel" aria-label="Faire une proposition">
         <label for="name-input">Nom du membre</label>
-        <div class="autocomplete">
-          <input
-            id="name-input"
-            type="text"
-            autocomplete="off"
-            role="combobox"
-            aria-controls="suggestions"
-            aria-autocomplete="list"
-            aria-expanded="false"
-            placeholder="Commencez à saisir un nom..."
-          />
-          <ul id="suggestions" class="suggestions" role="listbox" hidden></ul>
-        </div>
+        <input
+          id="name-input"
+          type="text"
+          autocomplete="off"
+          placeholder="Saisissez ou sélectionnez un nom..."
+        />
         <div id="selected-member-details" class="selected-member-details" hidden></div>
         <button id="guess-button" type="button">Valider la proposition</button>
         <p id="error-message" class="error" role="alert"></p>
