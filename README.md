@@ -1,2 +1,3 @@
 # Faridoodle
-Game finding a brass band member
+
+Jeu permettant de trouver un membre d'une fanfare.

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Faridoodle - Membre mystère</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="game">
+      <header class="game__header">
+        <p class="eyebrow">Faridoodle</p>
+        <h1>Qui est le membre mystère ?</h1>
+        <p class="instructions">Configurez une partie, puis trouvez le membre mystère.</p>
+      </header>
+
+      <section id="setup" class="setup" aria-labelledby="setup-title">
+        <h2 id="setup-title">Configurer la partie</h2>
+
+        <div class="mode-list" aria-label="Niveau de difficulté">
+          <button class="mode-button selected" type="button" data-mode="easy">Facile</button>
+          <button class="mode-button" type="button" data-mode="medium">Moyen</button>
+          <button class="mode-button" type="button" data-mode="hard">Difficile</button>
+        </div>
+
+        <details class="advanced">
+          <summary>Options avancées</summary>
+          <div class="advanced-grid">
+            <label>
+              Nombre de propositions
+              <select id="attempt-setting">
+                <option value="0">Illimité</option>
+                <option value="5">5 propositions</option>
+                <option value="10" selected>10 propositions</option>
+                <option value="15">15 propositions</option>
+              </select>
+            </label>
+
+            <label>
+              Temps maximum
+              <select id="timer-setting">
+                <option value="0" selected>Sans chronomètre</option>
+                <option value="60">1 minute</option>
+                <option value="180">3 minutes</option>
+                <option value="300">5 minutes</option>
+              </select>
+            </label>
+
+            <label>
+              Indice
+              <select id="hint-setting">
+                <option value="0" selected>Sans indice</option>
+                <option value="1">1 indice</option>
+                <option value="2">2 indices</option>
+                <option value="3">3 indices</option>
+              </select>
+            </label>
+
+            <label>
+              Recherche croisée en partie
+              <select id="entry-filter-setting">
+                <option value="yes" selected>Activée</option>
+                <option value="no">Désactivée</option>
+              </select>
+            </label>
+
+          </div>
+        </details>
+
+        <button id="start-button" type="button">Commencer la partie</button>
+      </section>
+
+      <section id="game-area" class="game-area" hidden>
+        <div class="game-status">
+          <p id="attempt-status"></p>
+          <p id="timer-status"></p>
+          <button id="hint-button" type="button" hidden>Utiliser un indice</button>
+        </div>
+        <p id="hint-text" class="hint" aria-live="polite"></p>
+
+        <section id="entry-filter" class="entry-filter" aria-labelledby="entry-filter-title">
+          <h2 id="entry-filter-title">Explorer les entrées</h2>
+          <p>Choisissez les valeurs à croiser pour afficher les membres correspondants.</p>
+          <div class="filter-controls">
+            <label>
+              Promotion
+              <select id="promotion-filter">
+                <option value="">Toutes les promotions</option>
+              </select>
+            </label>
+            <label>
+              Pupitre
+              <select id="pupitre-filter">
+                <option value="">Tous les pupitres</option>
+              </select>
+            </label>
+            <label>
+              Rôle
+              <select id="role-filter">
+                <option value="">Tous les rôles</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section class="guess-panel" aria-label="Faire une proposition">
+        <label for="name-input">Nom du membre</label>
+        <div class="autocomplete">
+          <input
+            id="name-input"
+            type="text"
+            autocomplete="off"
+            role="combobox"
+            aria-controls="suggestions"
+            aria-autocomplete="list"
+            aria-expanded="false"
+            placeholder="Commencez à saisir un nom..."
+          />
+          <ul id="suggestions" class="suggestions" role="listbox" hidden></ul>
+        </div>
+        <div id="selected-member-details" class="selected-member-details" hidden></div>
+        <button id="guess-button" type="button">Valider la proposition</button>
+        <p id="error-message" class="error" role="alert"></p>
+      </section>
+
+      <section id="success" class="success" hidden aria-live="polite">
+        <strong>Vous avez trouvé le membre mystère !</strong>
+        <button id="reset-button" type="button">Rejouer</button>
+      </section>
+
+      <section class="history" aria-labelledby="history-title">
+        <h2 id="history-title">Historique des propositions</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Promotion</th>
+                <th>Pupitre</th>
+                <th>Rôles</th>
+              </tr>
+            </thead>
+            <tbody id="history-body"></tbody>
+          </table>
+        </div>
+      </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
