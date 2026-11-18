@@ -78,6 +78,19 @@
         </div>
         <p id="hint-text" class="hint" aria-live="polite"></p>
 
+        <section class="guess-panel" aria-label="Faire une proposition">
+        <label for="name-input">Nom du membre</label>
+        <input
+          id="name-input"
+          type="text"
+          autocomplete="off"
+          placeholder="Saisissez ou sélectionnez un nom..."
+        />
+        <div id="selected-member-details" class="selected-member-details" hidden></div>
+        <button id="guess-button" type="button">Valider la proposition</button>
+        <p id="error-message" class="error" role="alert"></p>
+      </section>
+
         <section id="entry-filter" class="entry-filter" aria-labelledby="entry-filter-title">
           <h2 id="entry-filter-title">Explorer les entrées</h2>
           <p>Choisissez les valeurs à croiser pour afficher les membres correspondants.</p>
@@ -107,19 +120,6 @@
           </div>
           <ul id="filtered-member-list" class="filtered-member-list" aria-live="polite"></ul>
         </section>
-
-        <section class="guess-panel" aria-label="Faire une proposition">
-        <label for="name-input">Nom du membre</label>
-        <input
-          id="name-input"
-          type="text"
-          autocomplete="off"
-          placeholder="Saisissez ou sélectionnez un nom..."
-        />
-        <div id="selected-member-details" class="selected-member-details" hidden></div>
-        <button id="guess-button" type="button">Valider la proposition</button>
-        <p id="error-message" class="error" role="alert"></p>
-      </section>
 
       <section id="success" class="success" hidden aria-live="polite">
         <strong>Vous avez trouvé le membre mystère !</strong>
