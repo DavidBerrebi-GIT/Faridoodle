@@ -78,77 +78,81 @@
         </div>
         <p id="hint-text" class="hint" aria-live="polite"></p>
 
-        <section class="guess-panel" aria-label="Faire une proposition">
-        <label for="name-input">Nom du membre</label>
-        <div class="autocomplete">
-          <input
-            id="name-input"
-            type="text"
-            autocomplete="off"
-            role="combobox"
-            aria-controls="suggestions"
-            aria-autocomplete="list"
-            aria-expanded="false"
-            placeholder="Saisissez ou sélectionnez un nom..."
-          />
-          <ul id="suggestions" class="suggestions" role="listbox" hidden></ul>
-        </div>
-        <div id="selected-member-details" class="selected-member-details" hidden></div>
-        <button id="guess-button" type="button">Valider la proposition</button>
-        <p id="error-message" class="error" role="alert"></p>
-      </section>
+        <div class="game-columns">
+          <div class="game-main">
+            <section class="guess-panel" aria-label="Faire une proposition">
+              <label for="name-input">Nom du membre</label>
+              <div class="autocomplete">
+                <input
+                  id="name-input"
+                  type="text"
+                  autocomplete="off"
+                  role="combobox"
+                  aria-controls="suggestions"
+                  aria-autocomplete="list"
+                  aria-expanded="false"
+                  placeholder="Saisissez ou sélectionnez un nom..."
+                />
+                <ul id="suggestions" class="suggestions" role="listbox" hidden></ul>
+              </div>
+              <div id="selected-member-details" class="selected-member-details" hidden></div>
+              <button id="guess-button" type="button">Valider la proposition</button>
+              <p id="error-message" class="error" role="alert"></p>
+            </section>
 
-        <section id="entry-filter" class="entry-filter" aria-labelledby="entry-filter-title">
-          <h2 id="entry-filter-title">Explorer les entrées</h2>
-          <p>Choisissez les valeurs à croiser pour afficher les membres correspondants.</p>
-          <div class="filter-controls">
-            <label>
-              Promotion
-              <select id="promotion-filter">
-                <option value="">Toutes les promotions</option>
-              </select>
-            </label>
-            <label>
-              Pupitre
-              <select id="pupitre-filter">
-                <option value="">Tous les pupitres</option>
-              </select>
-            </label>
-            <label>
-              Rôle
-              <select id="role-filter">
-                <option value="">Tous les rôles</option>
-              </select>
-            </label>
+            <section id="success" class="success" hidden aria-live="polite">
+              <strong>Vous avez trouvé le membre mystère !</strong>
+              <button id="reset-button" type="button">Rejouer</button>
+            </section>
+
+            <section class="history" aria-labelledby="history-title">
+              <h2 id="history-title">Historique des propositions</h2>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Nom</th>
+                      <th>Promotion</th>
+                      <th>Pupitre</th>
+                      <th>Rôles</th>
+                    </tr>
+                  </thead>
+                  <tbody id="history-body"></tbody>
+                </table>
+              </div>
+            </section>
           </div>
-          <div class="filtered-members-header">
-            <strong>Membres correspondants</strong>
-            <span id="filtered-member-count"></span>
-          </div>
-          <ul id="filtered-member-list" class="filtered-member-list" aria-live="polite"></ul>
-        </section>
 
-      <section id="success" class="success" hidden aria-live="polite">
-        <strong>Vous avez trouvé le membre mystère !</strong>
-        <button id="reset-button" type="button">Rejouer</button>
-      </section>
-
-      <section class="history" aria-labelledby="history-title">
-        <h2 id="history-title">Historique des propositions</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Nom</th>
-                <th>Promotion</th>
-                <th>Pupitre</th>
-                <th>Rôles</th>
-              </tr>
-            </thead>
-            <tbody id="history-body"></tbody>
-          </table>
+          <section id="entry-filter" class="entry-filter" aria-labelledby="entry-filter-title">
+            <h2 id="entry-filter-title">Explorer les entrées</h2>
+            <p>Choisissez les valeurs à croiser pour afficher les membres correspondants.</p>
+            <div class="filter-controls">
+              <label>
+                Promotion
+                <select id="promotion-filter">
+                  <option value="">Toutes les promotions</option>
+                </select>
+              </label>
+              <label>
+                Pupitre
+                <select id="pupitre-filter">
+                  <option value="">Tous les pupitres</option>
+                </select>
+              </label>
+              <label>
+                Rôle
+                <select id="role-filter">
+                  <option value="">Tous les rôles</option>
+                </select>
+              </label>
+            </div>
+            <div class="filtered-members-header">
+              <strong>Membres correspondants</strong>
+              <span id="filtered-member-count"></span>
+            </div>
+            <ul id="filtered-member-list" class="filtered-member-list" aria-live="polite"></ul>
+          </section>
         </div>
-      </section>
       </section>
     </main>
 

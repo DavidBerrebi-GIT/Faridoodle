@@ -145,6 +145,17 @@ select {
   margin-left: auto;
 }
 
+.game-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 20px;
+  align-items: start;
+}
+
+.game-main {
+  min-width: 0;
+}
+
 .hint {
   min-height: 24px;
   color: var(--accent);
@@ -154,7 +165,7 @@ select {
 .entry-filter {
   display: grid;
   gap: 12px;
-  margin: 18px 0;
+  margin: 0;
   padding: 20px;
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -176,7 +187,7 @@ select {
 
 .filter-controls {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 12px;
 }
 
@@ -418,6 +429,10 @@ tbody tr:last-child td {
   }
 
   .guess-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .game-columns {
     grid-template-columns: 1fr;
   }
 
