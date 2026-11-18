@@ -1,60 +1,6 @@
-const PUPITRES = ["Trombone", "Saxophone", "Gros", "Basse", "Trompette"];
-
-const ROLES = [
-  "Président",
-  "Chef Mu",
-  "Roi des Blairo",
-  "Respo Com",
-  "Trésorier",
-  "Respo prev",
-  "Respo Bière",
-  "Blairo"
-];
-
-const members = [
-  { name: "Gros2019Président", promotion: 2019, pupitre: "Gros", roles: ["Président"] },
-  { name: "Trombone2019ChefMuBlairo", promotion: 2019, pupitre: "Trombone", roles: ["Chef Mu", "Blairo"] },
-  { name: "Saxophone2019RoiDesBlairo", promotion: 2019, pupitre: "Saxophone", roles: ["Roi des Blairo"] },
-  { name: "Gros2019RespoCom", promotion: 2019, pupitre: "Gros", roles: ["Respo Com"] },
-  { name: "Basse2019Trésorier", promotion: 2019, pupitre: "Basse", roles: ["Trésorier"] },
-  { name: "Gros2019RespoPrev", promotion: 2019, pupitre: "Gros", roles: ["Respo prev"] },
-  { name: "Trompette2019RespoBière", promotion: 2019, pupitre: "Trompette", roles: ["Respo Bière"] },
-  { name: "Trombone2019Blairo", promotion: 2019, pupitre: "Trombone", roles: ["Blairo"] },
-  { name: "Saxophone2019Blairo", promotion: 2019, pupitre: "Saxophone", roles: ["Blairo"] },
-
-  { name: "Trombone2020Président", promotion: 2020, pupitre: "Trombone", roles: ["Président"] },
-  { name: "Gros2020ChefMu", promotion: 2020, pupitre: "Gros", roles: ["Chef Mu"] },
-  { name: "Basse2020RoiDesBlairo", promotion: 2020, pupitre: "Basse", roles: ["Roi des Blairo"] },
-  { name: "Saxophone2020RespoCom", promotion: 2020, pupitre: "Saxophone", roles: ["Respo Com"] },
-  { name: "Gros2020TrésorierBlairo", promotion: 2020, pupitre: "Gros", roles: ["Trésorier", "Blairo"] },
-  { name: "Trompette2020RespoPrev", promotion: 2020, pupitre: "Trompette", roles: ["Respo prev"] },
-  { name: "Gros2020RespoBière", promotion: 2020, pupitre: "Gros", roles: ["Respo Bière"] },
-  { name: "Saxophone2020Blairo", promotion: 2020, pupitre: "Saxophone", roles: ["Blairo"] },
-  { name: "Basse2020Blairo", promotion: 2020, pupitre: "Basse", roles: ["Blairo"] },
-  { name: "Trombone2020Blairo", promotion: 2020, pupitre: "Trombone", roles: ["Blairo"] },
-
-  { name: "Basse2021Président", promotion: 2021, pupitre: "Basse", roles: ["Président"] },
-  { name: "Gros2021ChefMu", promotion: 2021, pupitre: "Gros", roles: ["Chef Mu"] },
-  { name: "Trompette2021RoiDesBlairo", promotion: 2021, pupitre: "Trompette", roles: ["Roi des Blairo"] },
-  { name: "Gros2021RespoCom", promotion: 2021, pupitre: "Gros", roles: ["Respo Com"] },
-  { name: "Trombone2021Trésorier", promotion: 2021, pupitre: "Trombone", roles: ["Trésorier"] },
-  { name: "Saxophone2021RespoPrev", promotion: 2021, pupitre: "Saxophone", roles: ["Respo prev"] },
-  { name: "Gros2021RespoBière", promotion: 2021, pupitre: "Gros", roles: ["Respo Bière"] },
-  { name: "Saxophone2021Blairo", promotion: 2021, pupitre: "Saxophone", roles: ["Blairo"] },
-  { name: "Trombone2021Blairo", promotion: 2021, pupitre: "Trombone", roles: ["Blairo"] },
-
-  { name: "Saxophone2022Président", promotion: 2022, pupitre: "Saxophone", roles: ["Président"] },
-  { name: "Trompette2022ChefMu", promotion: 2022, pupitre: "Trompette", roles: ["Chef Mu"] },
-  { name: "Gros2022RoiDesBlairo", promotion: 2022, pupitre: "Gros", roles: ["Roi des Blairo"] },
-  { name: "Basse2022RespoComBlairo", promotion: 2022, pupitre: "Basse", roles: ["Respo Com", "Blairo"] },
-  { name: "Gros2022Trésorier", promotion: 2022, pupitre: "Gros", roles: ["Trésorier"] },
-  { name: "Trombone2022RespoPrev", promotion: 2022, pupitre: "Trombone", roles: ["Respo prev"] },
-  { name: "Gros2022RespoBière", promotion: 2022, pupitre: "Gros", roles: ["Respo Bière"] },
-  { name: "Trompette2022Blairo", promotion: 2022, pupitre: "Trompette", roles: ["Blairo"] },
-  { name: "Basse2022Blairo", promotion: 2022, pupitre: "Basse", roles: ["Blairo"] },
-  { name: "Saxophone2022Blairo", promotion: 2022, pupitre: "Saxophone", roles: ["Blairo"] },
-  { name: "Trombone2022Blairo", promotion: 2022, pupitre: "Trombone", roles: ["Blairo"] }
-];
+let PUPITRES = [];
+let ROLES = [];
+let members = [];
 
 const nameInput = document.querySelector("#name-input");
 const suggestions = document.querySelector("#suggestions");
@@ -85,6 +31,7 @@ const roleFilter = document.querySelector("#role-filter");
 const selectedMemberDetails = document.querySelector("#selected-member-details");
 const filteredMemberList = document.querySelector("#filtered-member-list");
 const filteredMemberCount = document.querySelector("#filtered-member-count");
+const dataStatus = document.querySelector("#data-status");
 
 let target = null;
 let gameSolved = false;
@@ -97,7 +44,102 @@ let timerId = null;
 let selectedMode = "easy";
 let selectedSuggestion = -1;
 
+function parseCsvLine(line) {
+  const values = [];
+  let value = "";
+  let quoted = false;
+
+  for (let index = 0; index < line.length; index += 1) {
+    const character = line[index];
+
+    if (character === '"' && quoted && line[index + 1] === '"') {
+      value += '"';
+      index += 1;
+    } else if (character === '"') {
+      quoted = !quoted;
+    } else if (character === "," && !quoted) {
+      values.push(value);
+      value = "";
+    } else {
+      value += character;
+    }
+  }
+
+  values.push(value);
+  return values;
+}
+
+function parseCsv(text) {
+  const lines = text.replace(/^\uFEFF/, "").split(/\r?\n/).filter((line) => line.trim());
+  if (lines.length < 2) {
+    throw new Error("Le fichier CSV ne contient aucune entrée.");
+  }
+
+  const headers = parseCsvLine(lines[0]).map((header) => header.trim());
+  const entries = [];
+
+  lines.slice(1).forEach((line, index) => {
+    const values = parseCsvLine(line);
+    const row = Object.fromEntries(headers.map((header, column) =>
+      [header, (values[column] || "").trim()]
+    ));
+
+    if (!row.name || !row.promotion || !row.pupitre) {
+      throw new Error(`Ligne CSV ${index + 2} incomplète.`);
+    }
+
+    entries.push({
+      name: row.name,
+      promotion: Number(row.promotion),
+      pupitre: row.pupitre,
+      roles: (row.roles || "")
+        .split(";")
+        .map((role) => role.trim())
+        .filter(Boolean)
+    });
+  });
+
+  return entries;
+}
+
+async function loadMembers() {
+  const response = await fetch("data/csv/members.csv");
+  if (!response.ok) {
+    throw new Error(`Impossible de charger le CSV (${response.status}).`);
+  }
+
+  const entries = parseCsv(await response.text());
+  const names = new Set();
+
+  entries.forEach((entry) => {
+    if (!Number.isFinite(entry.promotion)) {
+      throw new Error(`Promotion invalide pour ${entry.name}.`);
+    }
+    if (names.has(normalized(entry.name))) {
+      throw new Error(`Nom en double : ${entry.name}.`);
+    }
+    names.add(normalized(entry.name));
+  });
+
+  members = entries;
+  candidateMembers = [...members];
+  PUPITRES = [...new Set(members.map((member) => member.pupitre))]
+    .sort((first, second) => first.localeCompare(second, "fr"));
+  ROLES = [...new Set(members.flatMap((member) => member.roles))]
+    .sort((first, second) => first.localeCompare(second, "fr"));
+}
+
 function populateOptions() {
+  promotionFilter.replaceChildren(
+    new Option("Toutes les promotions", "")
+  );
+  pupitreFilter.replaceChildren(
+    new Option("Tous les pupitres", "")
+  );
+  roleFilter.replaceChildren(
+    new Option("Tous les rôles", "")
+  );
+
   [...new Set(candidateMembers.map((member) => member.promotion))]
     .sort((first, second) => first - second)
     .forEach((promotion) => {
@@ -126,7 +168,7 @@ function normalized(value) {
 }
 
 function findMember(name) {
-  return candidateMembers.find((member) => normalized(member.name) === normalized(name));
+  return members.find((member) => normalized(member.name) === normalized(name));
 }
 
 function updateFilteredMemberList() {
@@ -381,8 +423,21 @@ function startGame() {
   nameInput.focus();
 }
 
-populateOptions();
-applyMode("easy");
+startButton.disabled = true;
+
+loadMembers()
+  .then(() => {
+    populateOptions();
+    applyMode("easy");
+    dataStatus.textContent = `${members.length} membres chargés depuis le CSV.`;
+    dataStatus.className = "";
+    startButton.disabled = false;
+  })
+  .catch((error) => {
+    dataStatus.textContent = error.message;
+    dataStatus.className = "error";
+    startButton.disabled = true;
+  });
 
 function submitGuess() {
   if (gameSolved) {
