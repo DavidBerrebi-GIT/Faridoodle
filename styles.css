@@ -145,6 +145,14 @@ select {
   margin-left: auto;
 }
 
+#menu-button {
+  margin-right: 0;
+}
+
+#hint-button {
+  margin-left: 0;
+}
+
 .game-columns {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 380px;

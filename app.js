@@ -73,6 +73,7 @@ const attemptStatus = document.querySelector("#attempt-status");
 const timerStatus = document.querySelector("#timer-status");
 const hintButton = document.querySelector("#hint-button");
 const hintText = document.querySelector("#hint-text");
+const menuButton = document.querySelector("#menu-button");
 const entryFilter = document.querySelector("#entry-filter");
 const gameResult = document.querySelector("#game-result");
 const gameResultMessage = document.querySelector("#game-result-message");
@@ -481,6 +482,20 @@ guessButton.addEventListener("click", submitGuess);
 
 resetButton.addEventListener("click", () => {
   startGame();
+});
+
+menuButton.addEventListener("click", () => {
+  stopTimer();
+  gameSolved = false;
+  gameArea.hidden = true;
+  setup.hidden = false;
+  gameResult.hidden = true;
+  revealedTarget.hidden = true;
+  errorMessage.textContent = "";
+  nameInput.value = "";
+  suggestions.hidden = true;
+  nameInput.setAttribute("aria-expanded", "false");
+  setup.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 revealButton.addEventListener("click", () => {
