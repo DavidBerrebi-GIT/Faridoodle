@@ -1,6 +1,6 @@
 name,promotion,pupitre,roles
 Gros2019Président,2019,Gros,Président
-Trombone2019ChefMu,2019,Trombone,Chef Mu
+Trombone2019ChefMuBlairo,2019,Trombone,Chef Mu;Blairo
 Saxophone2019RoiDesBlairo,2019,Saxophone,Roi des Blairo
 Gros2019RespoCom,2019,Gros,Respo Com
 Basse2019Trésorier,2019,Basse,Trésorier
@@ -12,7 +12,7 @@ Trombone2020Président,2020,Trombone,Président
 Gros2020ChefMu,2020,Gros,Chef Mu
 Basse2020RoiDesBlairo,2020,Basse,Roi des Blairo
 Saxophone2020RespoCom,2020,Saxophone,Respo Com
-Gros2020Trésorier,2020,Gros,Trésorier
+Gros2020TrésorierBlairo,2020,Gros,Trésorier;Blairo
 Trompette2020RespoPrev,2020,Trompette,Respo prev
 Gros2020RespoBière,2020,Gros,Respo Bière
 Saxophone2020Blairo,2020,Saxophone,Blairo
@@ -30,7 +30,7 @@ Trombone2021Blairo,2021,Trombone,Blairo
 Saxophone2022Président,2022,Saxophone,Président
 Trompette2022ChefMu,2022,Trompette,Chef Mu
 Gros2022RoiDesBlairo,2022,Gros,Roi des Blairo
-Basse2022RespoCom,2022,Basse,Respo Com
+Basse2022RespoComBlairo,2022,Basse,Respo Com;Blairo
 Gros2022Trésorier,2022,Gros,Trésorier
 Trombone2022RespoPrev,2022,Trombone,Respo prev
 Gros2022RespoBière,2022,Gros,Respo Bière

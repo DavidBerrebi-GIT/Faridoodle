@@ -13,7 +13,7 @@ const ROLES = [
 
 const members = [
   { name: "Gros2019Président", promotion: 2019, pupitre: "Gros", roles: ["Président"] },
-  { name: "Trombone2019ChefMu", promotion: 2019, pupitre: "Trombone", roles: ["Chef Mu"] },
+  { name: "Trombone2019ChefMuBlairo", promotion: 2019, pupitre: "Trombone", roles: ["Chef Mu", "Blairo"] },
   { name: "Saxophone2019RoiDesBlairo", promotion: 2019, pupitre: "Saxophone", roles: ["Roi des Blairo"] },
   { name: "Gros2019RespoCom", promotion: 2019, pupitre: "Gros", roles: ["Respo Com"] },
   { name: "Basse2019Trésorier", promotion: 2019, pupitre: "Basse", roles: ["Trésorier"] },
@@ -26,7 +26,7 @@ const members = [
   { name: "Gros2020ChefMu", promotion: 2020, pupitre: "Gros", roles: ["Chef Mu"] },
   { name: "Basse2020RoiDesBlairo", promotion: 2020, pupitre: "Basse", roles: ["Roi des Blairo"] },
   { name: "Saxophone2020RespoCom", promotion: 2020, pupitre: "Saxophone", roles: ["Respo Com"] },
-  { name: "Gros2020Trésorier", promotion: 2020, pupitre: "Gros", roles: ["Trésorier"] },
+  { name: "Gros2020TrésorierBlairo", promotion: 2020, pupitre: "Gros", roles: ["Trésorier", "Blairo"] },
   { name: "Trompette2020RespoPrev", promotion: 2020, pupitre: "Trompette", roles: ["Respo prev"] },
   { name: "Gros2020RespoBière", promotion: 2020, pupitre: "Gros", roles: ["Respo Bière"] },
   { name: "Saxophone2020Blairo", promotion: 2020, pupitre: "Saxophone", roles: ["Blairo"] },
@@ -46,7 +46,7 @@ const members = [
   { name: "Saxophone2022Président", promotion: 2022, pupitre: "Saxophone", roles: ["Président"] },
   { name: "Trompette2022ChefMu", promotion: 2022, pupitre: "Trompette", roles: ["Chef Mu"] },
   { name: "Gros2022RoiDesBlairo", promotion: 2022, pupitre: "Gros", roles: ["Roi des Blairo"] },
-  { name: "Basse2022RespoCom", promotion: 2022, pupitre: "Basse", roles: ["Respo Com"] },
+  { name: "Basse2022RespoComBlairo", promotion: 2022, pupitre: "Basse", roles: ["Respo Com", "Blairo"] },
   { name: "Gros2022Trésorier", promotion: 2022, pupitre: "Gros", roles: ["Trésorier"] },
   { name: "Trombone2022RespoPrev", promotion: 2022, pupitre: "Trombone", roles: ["Respo prev"] },
   { name: "Gros2022RespoBière", promotion: 2022, pupitre: "Gros", roles: ["Respo Bière"] },
