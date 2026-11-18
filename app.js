@@ -431,6 +431,11 @@ nameInput.addEventListener("input", () => {
   updateFilteredMemberList();
 });
 
+nameInput.addEventListener("blur", () => {
+  suggestions.hidden = true;
+  nameInput.setAttribute("aria-expanded", "false");
+});
+
 nameInput.addEventListener("keydown", (event) => {
   const items = [...suggestions.querySelectorAll("li")];
 
