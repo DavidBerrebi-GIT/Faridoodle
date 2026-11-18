@@ -80,12 +80,19 @@
 
         <section class="guess-panel" aria-label="Faire une proposition">
         <label for="name-input">Nom du membre</label>
-        <input
-          id="name-input"
-          type="text"
-          autocomplete="off"
-          placeholder="Saisissez ou sélectionnez un nom..."
-        />
+        <div class="autocomplete">
+          <input
+            id="name-input"
+            type="text"
+            autocomplete="off"
+            role="combobox"
+            aria-controls="suggestions"
+            aria-autocomplete="list"
+            aria-expanded="false"
+            placeholder="Saisissez ou sélectionnez un nom..."
+          />
+          <ul id="suggestions" class="suggestions" role="listbox" hidden></ul>
+        </div>
         <div id="selected-member-details" class="selected-member-details" hidden></div>
         <button id="guess-button" type="button">Valider la proposition</button>
         <p id="error-message" class="error" role="alert"></p>

@@ -52,6 +52,7 @@ const members = [
 ];
 
 const nameInput = document.querySelector("#name-input");
+const suggestions = document.querySelector("#suggestions");
 const guessButton = document.querySelector("#guess-button");
 const historyBody = document.querySelector("#history-body");
 const errorMessage = document.querySelector("#error-message");
@@ -85,6 +86,7 @@ let hintsRemaining = 0;
 let secondsRemaining = 0;
 let timerId = null;
 let selectedMode = "easy";
+let selectedSuggestion = -1;
 
 function populateOptions() {
   [...new Set(candidateMembers.map((member) => member.promotion))]
@@ -115,7 +117,7 @@ function normalized(value) {
 }
 
 function findMember(name) {
-  return getCrossedMembers().find((member) => normalized(member.name) === normalized(name));
+  return candidateMembers.find((member) => normalized(member.name) === normalized(name));
 }
 
 function updateFilteredMemberList() {
@@ -148,8 +150,40 @@ function updateFilteredMemberList() {
   });
 }
 
+function updateNameSuggestions() {
+  const query = normalized(nameInput.value);
+  const matches = query
+    ? candidateMembers
+        .filter((member) => normalized(member.name).includes(query))
+        .sort((first, second) => first.name.localeCompare(second.name, "fr"))
+    : [];
+
+  suggestions.replaceChildren();
+  selectedSuggestion = -1;
+  nameInput.setAttribute("aria-expanded", matches.length ? "true" : "false");
+
+  matches.slice(0, 8).forEach((member, index) => {
+    const item = document.createElement("li");
+    item.id = `suggestion-${index}`;
+    item.role = "option";
+    item.dataset.memberName = member.name;
+    item.textContent = member.name;
+
+    item.addEventListener("mousedown", (event) => {
+      event.preventDefault();
+      chooseSuggestion(member.name);
+    });
+
+    suggestions.append(item);
+  });
+
+  suggestions.hidden = matches.length === 0;
+}
+
 function chooseSuggestion(name) {
   nameInput.value = name;
+  suggestions.hidden = true;
+  nameInput.setAttribute("aria-expanded", "false");
   showSelectedMemberDetails(name);
   updateFilteredMemberList();
   nameInput.focus();
@@ -379,6 +413,8 @@ function submitGuess() {
   nameInput.value = "";
   selectedMemberDetails.hidden = true;
   selectedMemberDetails.replaceChildren();
+  suggestions.hidden = true;
+  nameInput.setAttribute("aria-expanded", "false");
   updateFilteredMemberList();
   nameInput.focus();
 }
@@ -386,14 +422,36 @@ function submitGuess() {
 nameInput.addEventListener("input", () => {
   selectedMemberDetails.hidden = true;
   selectedMemberDetails.replaceChildren();
+  updateNameSuggestions();
   updateFilteredMemberList();
 });
 
 nameInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
+  const items = [...suggestions.querySelectorAll("li")];
+
+  if (event.key === "ArrowDown" && items.length) {
     event.preventDefault();
+    selectedSuggestion = (selectedSuggestion + 1) % items.length;
+  } else if (event.key === "ArrowUp" && items.length) {
+    event.preventDefault();
+    selectedSuggestion = (selectedSuggestion - 1 + items.length) % items.length;
+  } else if (event.key === "Enter") {
+    event.preventDefault();
+    if (selectedSuggestion >= 0) {
+      chooseSuggestion(items[selectedSuggestion].dataset.memberName);
+      return;
+    }
     submitGuess();
+  } else if (event.key === "Escape") {
+    suggestions.hidden = true;
+    nameInput.setAttribute("aria-expanded", "false");
+  } else {
+    return;
   }
+
+  items.forEach((item, index) => {
+    item.setAttribute("aria-selected", String(index === selectedSuggestion));
+  });
 });
 
 guessButton.addEventListener("click", submitGuess);
@@ -428,6 +486,7 @@ function getCrossedMembers() {
 
 function updateCrossedFilter() {
   nameInput.focus();
+  updateNameSuggestions();
   updateFilteredMemberList();
 }
 
