@@ -226,7 +226,7 @@ function promotionAttribute(promotion) {
     return attribute(String(promotion), true);
   }
 
-  const arrow = promotion < target.promotion ? "↓" : "↑";
+  const arrow = promotion < target.promotion ? "↑" : "↓";
   const span = attribute(`${promotion} ${arrow}`, false);
   return span;
 }
@@ -239,7 +239,7 @@ function nameAttribute(name) {
   const comparison = name.localeCompare(target.name, "fr", {
     sensitivity: "base"
   });
-  const arrow = comparison < 0 ? "↓" : "↑";
+  const arrow = comparison < 0 ? "↑" : "↓";
   return attribute(`${name} ${arrow}`, false);
 }
 
