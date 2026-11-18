@@ -226,8 +226,8 @@ function promotionAttribute(promotion) {
     return attribute(String(promotion), true);
   }
 
-  const direction = promotion < target.promotion ? "Avant" : "Après";
-  const span = attribute(`${promotion} - ${direction}`, false);
+  const arrow = promotion < target.promotion ? "↓" : "↑";
+  const span = attribute(`${promotion} ${arrow}`, false);
   return span;
 }
 
@@ -239,8 +239,8 @@ function nameAttribute(name) {
   const comparison = name.localeCompare(target.name, "fr", {
     sensitivity: "base"
   });
-  const direction = comparison < 0 ? "Avant" : "Après";
-  return attribute(`${name} - ${direction}`, false);
+  const arrow = comparison < 0 ? "↓" : "↑";
+  return attribute(`${name} ${arrow}`, false);
 }
 
 function roleAttribute(guessRoles) {
