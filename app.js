@@ -61,7 +61,6 @@ const suggestions = document.querySelector("#suggestions");
 const guessButton = document.querySelector("#guess-button");
 const historyBody = document.querySelector("#history-body");
 const errorMessage = document.querySelector("#error-message");
-const success = document.querySelector("#success");
 const resetButton = document.querySelector("#reset-button");
 const setup = document.querySelector("#setup");
 const gameArea = document.querySelector("#game-area");
@@ -75,6 +74,10 @@ const timerStatus = document.querySelector("#timer-status");
 const hintButton = document.querySelector("#hint-button");
 const hintText = document.querySelector("#hint-text");
 const entryFilter = document.querySelector("#entry-filter");
+const gameResult = document.querySelector("#game-result");
+const gameResultMessage = document.querySelector("#game-result-message");
+const revealButton = document.querySelector("#reveal-button");
+const revealedTarget = document.querySelector("#revealed-target");
 const promotionFilter = document.querySelector("#promotion-filter");
 const pupitreFilter = document.querySelector("#pupitre-filter");
 const roleFilter = document.querySelector("#role-filter");
@@ -284,6 +287,17 @@ function stopTimer() {
   }
 }
 
+function showGameResult(won, message) {
+  gameSolved = true;
+  stopTimer();
+  gameResultMessage.textContent = message;
+  revealButton.hidden = won;
+  revealedTarget.hidden = true;
+  revealedTarget.textContent = "";
+  gameResult.hidden = false;
+  gameResult.className = won ? "success" : "failure";
+}
+
 function startTimer() {
   stopTimer();
   updateTimerStatus();
@@ -299,7 +313,7 @@ function startTimer() {
     if (secondsRemaining <= 0) {
       stopTimer();
       gameSolved = true;
-      errorMessage.textContent = "Temps écoulé. Lancez une nouvelle partie.";
+      showGameResult(false, "Temps écoulé.");
     }
   }, 1000);
 }
@@ -346,7 +360,10 @@ function startGame() {
 
   setup.hidden = true;
   gameArea.hidden = false;
-  success.hidden = true;
+  gameResult.hidden = true;
+  gameResult.className = "success";
+  revealButton.hidden = true;
+  revealedTarget.hidden = true;
   hintText.textContent = "";
   hintButton.hidden = hintsRemaining === 0;
   entryFilter.hidden = entryFilterSetting.value !== "yes";
@@ -406,13 +423,9 @@ function submitGuess() {
   historyBody.prepend(row);
 
   if (guessedMember.name === target.name) {
-    gameSolved = true;
-    stopTimer();
-    success.hidden = false;
+    showGameResult(true, "Vous avez trouvé le membre mystère !");
   } else if (attemptsLimit > 0 && attemptsUsed >= attemptsLimit) {
-    gameSolved = true;
-    stopTimer();
-    errorMessage.textContent = "Limite atteinte. Lancez une nouvelle partie.";
+    showGameResult(false, "Limite atteinte.");
   }
 
   nameInput.value = "";
@@ -468,6 +481,13 @@ guessButton.addEventListener("click", submitGuess);
 
 resetButton.addEventListener("click", () => {
   startGame();
+});
+
+revealButton.addEventListener("click", () => {
+  revealedTarget.textContent =
+    `${target.name} - ${target.promotion} - ${target.pupitre} - ${target.roles.join(", ")}`;
+  revealedTarget.hidden = false;
+  revealButton.hidden = true;
 });
 
 startButton.addEventListener("click", startGame);

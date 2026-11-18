@@ -100,9 +100,13 @@
               <p id="error-message" class="error" role="alert"></p>
             </section>
 
-            <section id="success" class="success" hidden aria-live="polite">
-              <strong>Vous avez trouvé le membre mystère !</strong>
+            <section id="game-result" class="success" hidden aria-live="polite">
+              <strong id="game-result-message"></strong>
+              <div class="result-actions">
+                <button id="reveal-button" type="button" hidden>Montrer le membre</button>
               <button id="reset-button" type="button">Rejouer</button>
+              </div>
+              <p id="revealed-target" class="revealed-target" hidden></p>
             </section>
 
             <section class="history" aria-labelledby="history-title">
